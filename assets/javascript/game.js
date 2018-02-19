@@ -5,34 +5,45 @@ var random = 0;
 var crystalCollection = [{
     name: "agate",
     value: 0,
+    minValue: 1,
+    maxValue: 12,
     randomValue: function () {
-        this.value = Math.floor(Math.random() * 10) + 1;
+        this.value = randomNumberFromInterval(this.minValue, this.maxValue);
     }
 },
 {
     name: "emerald",
     value: 0,
+    minValue: 1,
+    maxValue: 12,
     randomValue: function () {
-        this.value = Math.floor(Math.random() * 10) + 1;
+        this.value = randomNumberFromInterval(this.minValue, this.maxValue);
     }
 },
 {
     name: "ruby",
     value: 0,
+    minValue: 1,
+    maxValue: 12,
     randomValue: function () {
-        this.value = Math.floor(Math.random() * 10) + 1;
+        this.value = randomNumberFromInterval(this.minValue, this.maxValue);
     }
 },
 {
     name: "diamond",
     value: 0,
+    minValue: 1,
+    maxValue: 12,
     randomValue: function () {
-        this.value = Math.floor(Math.random() * 10) + 1;
+        this.value = randomNumberFromInterval(this.minValue, this.maxValue);
     }
 }
 ];
 
 
+function randomNumberFromInterval(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 var game = {
     wins: 0,
@@ -44,25 +55,27 @@ var game = {
 $(document).ready(function () {
 
 
-    setIntialValues();
+
+    //setIntialValues();
+    displayScore();
 
 
     function setIntialValues() {
         random = 0;
         totalScore = 0;
-        $("#wins").empty();
-        $("#losses").empty();
-        $("#randomNumberHolder").empty();
-        $("#wins").html("Wins : ");
-        $("#losses").html("Losses :");
+        $("#totalScoreHolder").text(totalScore);
         $.each(crystalCollection, function (idx, obj) {
             obj.randomValue();
         })
+
+        $("#randomNumberHolder").empty();
+
+
         generateRandomNumber();
 
     }
     function generateRandomNumber() {
-        random = Math.floor(Math.random() * 100);
+        random = randomNumberFromInterval(1, 120);
         var h3Tag = $("<h3>");
 
         h3Tag.html(random);
@@ -94,7 +107,7 @@ $(document).ready(function () {
         else if (totalScore > random) {
             game.loses += 1;
             displayScore();
-            setIntialValues();
+
 
         }
 
@@ -102,9 +115,11 @@ $(document).ready(function () {
     }
 
     function displayScore() {
-
-        $("#wins").append(game.wins);
-        $("#losses").append(game.loses);
+        $("#wins").empty();
+        $("#losses").empty();
+        $("#wins").html("Wins : " + game.wins);
+        $("#losses").html("Losses :" + game.loses);
+        setIntialValues();
     }
 
 });
