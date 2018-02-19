@@ -3,7 +3,7 @@
 var totalScore = 0;
 var random = 0;
 var crystalCollection = [{
-    name: "agate",
+    name: "avatan",
     value: 0,
     minValue: 1,
     maxValue: 12,
@@ -12,7 +12,7 @@ var crystalCollection = [{
     }
 },
 {
-    name: "emerald",
+    name: "greenapatite",
     value: 0,
     minValue: 1,
     maxValue: 12,
@@ -21,7 +21,7 @@ var crystalCollection = [{
     }
 },
 {
-    name: "ruby",
+    name: "marvel",
     value: 0,
     minValue: 1,
     maxValue: 12,
@@ -30,7 +30,7 @@ var crystalCollection = [{
     }
 },
 {
-    name: "diamond",
+    name: "tumblr",
     value: 0,
     minValue: 1,
     maxValue: 12,
@@ -54,7 +54,9 @@ var game = {
 
 $(document).ready(function () {
 
-
+   $("img").animate({
+    opacity :.5
+   });
 
     //setIntialValues();
     displayScore();
@@ -121,5 +123,13 @@ $(document).ready(function () {
         $("#losses").html("Losses :" + game.loses);
         setIntialValues();
     }
+
+    $("img").hover(function(){
+        $(this).stop();
+        $(this).animate({opacity:1},'fast')
+    }, function(){
+        $(this).stop().animate({opacity:.5},'slow')
+    });
+    
 
 });
